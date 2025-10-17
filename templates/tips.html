@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bloom by Jasmine | Skincare Tips</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4ecf7;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #c8a2c8;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .tip-card {
+            background-color: #f8f0fa;
+            border-left: 6px solid #c8a2c8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #5e3370;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .buttons {
+            margin-top: 15px;
+        }
+        .btn {
+            background-color: #c8a2c8;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #a76eb0;
+        }
+        .add-btn {
+            background-color: #a76eb0;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <header>Bloom by Jasmine 🌸 | Skincare Tips</header>
+    <div class="container">
+        <a href="/" class="btn">🏡 Home</a>
+        <a href="/add" class="btn add-btn">➕ Add New Tip</a>
+        <h2 style="color:#5e3370;">✨ Skincare Tips Collection ✨</h2>
+
+        {% for tip in tips %}
+        <div class="tip-card">
+            <h3>{{ tip.title }}</h3>
+            <p>{{ tip.content }}</p>
+            <div class="buttons">
+                <a href="/edit/{{ tip.id }}" class="btn">✏️ Edit</a>
+                <a href="/delete/{{ tip.id }}" class="btn" style="background-color:#e57373;">🗑 Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
