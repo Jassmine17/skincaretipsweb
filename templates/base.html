@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bloom</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  /* Sticky Footer Layout */
+  html, body { height: 100%; margin: 0; }
+  .page-container { min-height: 100%; position: relative; }
+  .content-wrap { padding-bottom: 80px; }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #b497d6;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+  }
+</style>
+
+</head>
+<body>
+<div class="page-container">
+<div class="content-wrap">
+
+{% block content %}
+{% endblock %}
+
+</div>
+<footer>© 2025 Bloom by Jasmine</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Plans</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  html, body { height: 100%; margin: 0; }
+  .page-container { min-height: 100%; position: relative; }
+  .content-wrap { padding-bottom: 80px; }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background:#b497d6;
+    color:white;
+    text-align:center;
+    padding-top:20px;
+  }
+
+  body { font-family:Poppins,Arial; background:#f8f4ff; }
+
+  header {
+    background:#b497d6;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:1.3rem;
+  }
+
+  .container {
+    width:90%;
+    max-width:700px;
+    margin:20px auto;
+  }
+
+  .plan-box {
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  }
+
+  a { color:#6a359c; text-decoration:none; }
+
+  .top-btn {
+    display:block;
+    width:200px;
+    margin:0 auto 20px;
+    padding:12px;
+    background:white;
+    color:#6a359c;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+  }
+</style>
+
+</head>
+<body>
+<div class="page-container">
+<div class="content-wrap">
+
+<header>Your Skincare Plans</header>
+
+<div class="container">
+
+  <a class="top-btn" href="{{ url_for('add_plan_page') }}">+ Create New Plan</a>
+
+  {% if plans %}
+    {% for p in plans %}
+      <div class="plan-box">
+        <h3>{{ p[1] }}</h3>
+        <p>{{ p[2] }}</p>
+        <small>{{ p[3] }}</small>
+        <br><br>
+        <a href="{{ url_for('view_plan', plan_id=p[0]) }}">View</a> ·
+        <a href="{{ url_for('edit_plan', plan_id=p[0]) }}">Edit</a> ·
+        <a href="{{ url_for('delete_plan', plan_id=p[0]) }}">Delete</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p style="text-align:center;">You have no plans yet.</p>
+  {% endif %}
+
+</div>
+
+</div>
+<footer>© 2025 Bloom by Jasmine</footer>
+</div>
+</body>
+</html>

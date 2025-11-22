@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  /* Sticky Footer */
+  html, body { height: 100%; margin: 0; font-family: Poppins, Arial, sans-serif; }
+  .page-container { min-height: 100%; position: relative; }
+  .content-wrap { padding-bottom: 80px; }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background:#b497d6;
+    color:white;
+    text-align:center;
+    padding-top:20px;
+  }
+
+  body { background:#f9f4ff; }
+
+  header {
+    background:#b497d6;
+    padding:15px;
+    color:white;
+    text-align:center;
+    font-size:1.3rem;
+  }
+
+  .top-bar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:1000px;
+    margin:20px auto;
+    gap:20px;
+    padding:0 20px;
+  }
+
+  .left-col { flex:0 0 320px; text-align:center; }
+  .right-col { flex:1; }
+
+  .actions {
+    margin-top:10px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+  }
+
+  .btn {
+    display:block;
+    width:220px;
+    padding:12px;
+    background:white;
+    border-radius:12px;
+    color:#6a359c;
+    text-decoration:none;
+    font-size:1.05rem;
+    box-shadow:0 3px 8px rgba(0,0,0,0.08);
+  }
+
+  /* Create tip card */
+  .post-card {
+    background:white;
+    border-radius:12px;
+    padding:14px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.06);
+    margin-bottom:18px;
+  }
+
+  .post-card input, .post-card textarea, .post-card select {
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #eee;
+    margin-top:8px;
+    font-size:1rem;
+    box-sizing:border-box;
+  }
+
+  .post-card button {
+    margin-top:10px;
+    padding:10px 14px;
+    background:#b497d6;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:1rem;
+  }
+
+  /* Feed */
+  .feed {
+    max-width:800px;
+    margin:20px auto;
+    padding:0 20px;
+  }
+
+  .feed-item {
+    background:white;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:16px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .meta {
+    font-size:0.9rem;
+    color:#6a359c;
+    margin-bottom:8px;
+  }
+
+  .title {
+    font-weight:600;
+    margin-bottom:8px;
+  }
+
+  .content {
+    color:#333;
+    margin-bottom:10px;
+  }
+
+  .concern {
+    font-size:0.9rem;
+    color:#777;
+  }
+
+  @media (max-width:900px) {
+    .top-bar { flex-direction:column; align-items:stretch; }
+    .left-col { order:2; }
+    .right-col { order:1; }
+  }
+</style>
+
+</head>
+<body>
+<div class="page-container">
+<div class="content-wrap">
+
+<header>Welcome, {{ session['username'] }} ✨</header>
+
+<div class="top-bar">
+
+  <!-- Left column: actions -->
+  <div class="left-col">
+    <div class="actions">
+      <a class="btn" href="{{ url_for('tips_page') }}">Your Tips</a>
+      <a class="btn" href="{{ url_for('add_plan_page') }}">Create Plan</a>
+      <a class="btn" href="{{ url_for('profile') }}">Profile</a>
+      <a class="btn" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+
+  <!-- Right column: post box and feed -->
+  <div class="right-col">
+
+    <!-- Create Tip box (posts to /post_tip) -->
+    <div class="post-card">
+      <form action="{{ url_for('post_tip') }}" method="POST">
+        <label style="color:#6a359c;font-weight:600;">Share a tip</label>
+        <input name="title" placeholder="Title (optional)">
+        <textarea name="content" rows="3" placeholder="Write your tip..."></textarea>
+
+        <select name="concern">
+          <option value="">Select a concern (optional)</option>
+          <option>acne</option>
+          <option>dry skin</option>
+          <option>oily skin</option>
+          <option>pores</option>
+          <option>wrinkles</option>
+        </select>
+
+        <input name="concern_text" placeholder="Or type a custom concern">
+
+        <button type="submit">Post Tip</button>
+      </form>
+    </div>
+
+    <!-- Feed -->
+    <div class="feed">
+      {% if feed %}
+        {% for item in feed %}
+          {# item: (id, title, content, concern, created_at, username) #}
+          <div class="feed-item">
+            <div class="meta">{{ item[5] }} • {{ item[4] }}</div>
+            {% if item[1] %}
+              <div class="title">{{ item[1] }}</div>
+            {% endif %}
+            <div class="content">{{ item[2] }}</div>
+            {% if item[3] %}
+              <div class="concern">Concern: {{ item[3] }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <p style="text-align:center;color:#6a359c;">No tips yet — be the first to post!</p>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+</div>
+<footer>© 2025 Bloom by Jasmine</footer>
+</div>
+</body>
+</html>

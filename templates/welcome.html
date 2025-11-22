@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Welcome to Bloom</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: #f4eaff;
+        font-family: Poppins, Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .welcome-container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 40px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        color: #6a359c;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin-bottom: 25px;
+        color: #6a359c;
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 25px;
+        margin: 10px;
+        font-size: 1rem;
+        color: white;
+        background: #b497d6;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    .btn:hover {
+        background: #a47ccf;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background: #b497d6;
+        color: white;
+        font-size: 0.9rem;
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="welcome-container">
+    <h1>Welcome to Bloom 🌸</h1>
+    <p>Your personal skincare companion.</p>
+
+    <a href="{{ url_for('login') }}" class="btn">Login</a>
+    <a href="{{ url_for('register') }}" class="btn">Register</a>
+</div>
+
+<footer>© 2025 Bloom by Jasmine</footer>
+
+</body>
+</html>
